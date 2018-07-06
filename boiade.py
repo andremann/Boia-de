@@ -62,7 +62,7 @@ def tweet():
     
     try:
         TWITTER_API.update_status(status=status, lat=43.5519, long=10.308)
-        LOGGER.info('Tweeted status: %s', status)
+        LOGGER.info('Tweeted status: %s', status.encode())
     except TwythonError as err:
         LOGGER.error(err)
     SCHEDULER.remove_job('boiade')
