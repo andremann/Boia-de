@@ -1,0 +1,4 @@
+.vscode
+boiade.log
+__pycache__
+secrets.py
