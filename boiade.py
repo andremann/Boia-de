@@ -65,7 +65,7 @@ def tweet():
         LOGGER.info('Tweeted status: %s', status.encode())
     except TwythonError as err:
         LOGGER.error(err)
-        fallback = status + '!'
+        fallback = status[:-1] + '!'
         LOGGER.info('Tweeted status: %s', fallback)
         TWITTER_API.update_status(status=fallback)
     SCHEDULER.remove_job('boiade')
