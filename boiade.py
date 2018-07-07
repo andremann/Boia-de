@@ -66,7 +66,7 @@ def tweet():
     except TwythonError as err:
         LOGGER.error(err)
         fallback = status[:-1] + '!'
-        LOGGER.info('Tweeted status: %s', fallback)
+        LOGGER.info('Tweeted status: %s', fallback.encode())
         TWITTER_API.update_status(status=fallback)
     SCHEDULER.remove_job('boiade')
     next_run = random.randint(10, 60)
