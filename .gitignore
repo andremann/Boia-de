@@ -2,3 +2,4 @@
 boiade.log
 __pycache__
 secrets.py
+*.log

@@ -69,7 +69,7 @@ def tweet():
         LOGGER.info('Tweeted status: %s', fallback.encode())
         TWITTER_API.update_status(status=fallback)
     SCHEDULER.remove_job('boiade')
-    next_run = random.randint(10, 60)
+    next_run = random.randint(30, 60)
     LOGGER.info('Next tweet scheduled in %s minutes', next_run)
     SCHEDULER.add_job(tweet, 'interval', minutes=next_run, id='boiade')
 
