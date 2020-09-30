@@ -1,3 +1,5 @@
+# coding=utf-8
+
 import re
 import numpy as np
 import random
@@ -52,6 +54,8 @@ def generate_status():
             # status = status[:-1] + '.'
             status = re.sub(r'(boia dé|dé|boia)', r'\1,', status)
             status = re.sub(r',\s$|.$', '.', status)
+            # A sentence should end with 'certo...' rather than 'certo.'
+            status = re.sub(r'certo.$', 'certo...', status)
             return status.capitalize()
         generated_sequence.append(next_token)
         last_token = next_token
@@ -66,10 +70,10 @@ def tweet():
     except TwythonError as err:
         LOGGER.error(err)
         fallback = status[:-1] + '!'
-        LOGGER.info('Tweeted status: %s', fallback.encode())
+        LOGGER.info('Tweeted status: %s', fallback)
         TWITTER_API.update_status(status=fallback)
     SCHEDULER.remove_job('boiade')
-    next_run = random.randint(30, 60)
+    next_run = random.randint(0, 0)
     LOGGER.info('Next tweet scheduled in %s minutes', next_run)
     SCHEDULER.add_job(tweet, 'interval', minutes=next_run, id='boiade')
 
